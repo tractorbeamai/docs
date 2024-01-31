@@ -1,0 +1,1505 @@
+openapi: 3.0.2
+info:
+  title: "TractorBeam API"
+  version: "0.1"
+paths:
+  /api/auth/logout/:
+    get:
+      operationId: listLogouts
+      description: "Calls Django logout method and delete the Token object
+
+        assigned to the current User object.
+
+
+        Accepts/Returns nothing."
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+          description: ""
+      tags:
+        - api
+    post:
+      operationId: createLogout
+      description: "Calls Django logout method and delete the Token object
+
+        assigned to the current User object.
+
+
+        Accepts/Returns nothing."
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        "201":
+          content:
+            application/json:
+              schema: {}
+          description: ""
+      tags:
+        - api
+  /api/auth/user/:
+    get:
+      operationId: retrieveUserDetails
+      description: "Reads and updates UserModel fields
+
+        Accepts GET, PUT, PATCH methods.
+
+
+        Default accepted fields: username, first_name, last_name
+
+        Default display fields: pk, username, email, first_name, last_name
+
+        Read-only fields: pk, email
+
+
+        Returns UserModel fields."
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDetails"
+          description: ""
+      tags:
+        - api
+    put:
+      operationId: updateUserDetails
+      description: "Reads and updates UserModel fields
+
+        Accepts GET, PUT, PATCH methods.
+
+
+        Default accepted fields: username, first_name, last_name
+
+        Default display fields: pk, username, email, first_name, last_name
+
+        Read-only fields: pk, email
+
+
+        Returns UserModel fields."
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDetails"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/UserDetails"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/UserDetails"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDetails"
+          description: ""
+      tags:
+        - api
+    patch:
+      operationId: partialUpdateUserDetails
+      description: "Reads and updates UserModel fields
+
+        Accepts GET, PUT, PATCH methods.
+
+
+        Default accepted fields: username, first_name, last_name
+
+        Default display fields: pk, username, email, first_name, last_name
+
+        Read-only fields: pk, email
+
+
+        Returns UserModel fields."
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDetails"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/UserDetails"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/UserDetails"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDetails"
+          description: ""
+      tags:
+        - api
+  /api/client/connections/{connectionId}/oauth2/authorize/:
+    get:
+      operationId: listClientOAuth2Authorizes
+      description: ""
+      parameters:
+        - name: connectionId
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+          description: ""
+      tags:
+        - api
+  /api/oauth2/callback/:
+    get:
+      operationId: listClientOAuth2Callbacks
+      description: ""
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+          description: ""
+      tags:
+        - api
+  /api/projects/:
+    get:
+      operationId: listProjects
+      description: ""
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Project"
+          description: ""
+      tags:
+        - api
+    post:
+      operationId: createProject
+      description: ""
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Project"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/Project"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/Project"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+          description: ""
+      tags:
+        - api
+  /api/projects/{id}/:
+    get:
+      operationId: retrieveProject
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+          description: ""
+      tags:
+        - api
+    put:
+      operationId: updateProject
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Project"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/Project"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/Project"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+          description: ""
+      tags:
+        - api
+    patch:
+      operationId: partialUpdateProject
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Project"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/Project"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/Project"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+          description: ""
+      tags:
+        - api
+    delete:
+      operationId: destroyProject
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      responses:
+        "204":
+          description: ""
+      tags:
+        - api
+  /api/api-keys/{id}/:
+    get:
+      operationId: retrieveAPIKeyPair
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIKeyPair"
+          description: ""
+      tags:
+        - api
+    put:
+      operationId: updateAPIKeyPair
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/APIKeyPair"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/APIKeyPair"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/APIKeyPair"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIKeyPair"
+          description: ""
+      tags:
+        - api
+    patch:
+      operationId: partialUpdateAPIKeyPair
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/APIKeyPair"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/APIKeyPair"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/APIKeyPair"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIKeyPair"
+          description: ""
+      tags:
+        - api
+    delete:
+      operationId: destroyAPIKeyPair
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      responses:
+        "204":
+          description: ""
+      tags:
+        - api
+  /api/provider-configs/{id}/:
+    get:
+      operationId: retrieveProviderConfig
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProviderConfig"
+          description: ""
+      tags:
+        - api
+    put:
+      operationId: updateProviderConfig
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProviderConfig"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ProviderConfig"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/ProviderConfig"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProviderConfig"
+          description: ""
+      tags:
+        - api
+    patch:
+      operationId: partialUpdateProviderConfig
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProviderConfig"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ProviderConfig"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/ProviderConfig"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProviderConfig"
+          description: ""
+      tags:
+        - api
+    delete:
+      operationId: destroyProviderConfig
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      responses:
+        "204":
+          description: ""
+      tags:
+        - api
+  /api/client/connections/:
+    get:
+      operationId: listProviderConnections
+      description: ""
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ProviderConnection"
+          description: ""
+      tags:
+        - api
+    post:
+      operationId: createProviderConnection
+      description: ""
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProviderConnection"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ProviderConnection"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/ProviderConnection"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProviderConnection"
+          description: ""
+      tags:
+        - api
+  /api/client/connections/{id}/:
+    get:
+      operationId: retrieveProviderConnection
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProviderConnection"
+          description: ""
+      tags:
+        - api
+    put:
+      operationId: updateProviderConnection
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProviderConnection"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ProviderConnection"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/ProviderConnection"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProviderConnection"
+          description: ""
+      tags:
+        - api
+    patch:
+      operationId: partialUpdateProviderConnection
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProviderConnection"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ProviderConnection"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/ProviderConnection"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProviderConnection"
+          description: ""
+      tags:
+        - api
+    delete:
+      operationId: destroyProviderConnection
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      responses:
+        "204":
+          description: ""
+      tags:
+        - api
+  /api/client/provider-configs/:
+    get:
+      operationId: listClientProviderConfigs
+      description: ""
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ProviderConfig"
+          description: ""
+      tags:
+        - api
+  /api/client/provider-configs/{id}/:
+    get:
+      operationId: retrieveClientProviderConfig
+      description: ""
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProviderConfig"
+          description: ""
+      tags:
+        - api
+  /api/projects/{project}/api-keys/:
+    get:
+      operationId: listAPIKeyPairs
+      description: ""
+      parameters:
+        - name: project
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/APIKeyPair"
+          description: ""
+      tags:
+        - api
+    post:
+      operationId: createProjectAPIKeyPair
+      description: ""
+      parameters:
+        - name: project
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/APIKeyPair"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/APIKeyPair"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/APIKeyPair"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIKeyPair"
+          description: ""
+      tags:
+        - api
+  /api/projects/{project}/api-keys/{id}/:
+    get:
+      operationId: retrieveProjectAPIKeyPair
+      description: ""
+      parameters:
+        - name: project
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIKeyPair"
+          description: ""
+      tags:
+        - api
+    put:
+      operationId: updateProjectAPIKeyPair
+      description: ""
+      parameters:
+        - name: project
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/APIKeyPair"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/APIKeyPair"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/APIKeyPair"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIKeyPair"
+          description: ""
+      tags:
+        - api
+    patch:
+      operationId: partialUpdateProjectAPIKeyPair
+      description: ""
+      parameters:
+        - name: project
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/APIKeyPair"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/APIKeyPair"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/APIKeyPair"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIKeyPair"
+          description: ""
+      tags:
+        - api
+    delete:
+      operationId: destroyProjectAPIKeyPair
+      description: ""
+      parameters:
+        - name: project
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      responses:
+        "204":
+          description: ""
+      tags:
+        - api
+  /api/projects/{project}/provider-configs/:
+    get:
+      operationId: listProjectProviderConfigs
+      description: ""
+      parameters:
+        - name: project
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ProviderConfig"
+          description: ""
+      tags:
+        - api
+    post:
+      operationId: createProjectProviderConfig
+      description: ""
+      parameters:
+        - name: project
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProviderConfig"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ProviderConfig"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/ProviderConfig"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProviderConfig"
+          description: ""
+      tags:
+        - api
+  /api/projects/{project}/provider-configs/{id}/:
+    get:
+      operationId: retrieveProjectProviderConfig
+      description: ""
+      parameters:
+        - name: project
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProviderConfig"
+          description: ""
+      tags:
+        - api
+    put:
+      operationId: updateProjectProviderConfig
+      description: ""
+      parameters:
+        - name: project
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProviderConfig"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ProviderConfig"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/ProviderConfig"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProviderConfig"
+          description: ""
+      tags:
+        - api
+    patch:
+      operationId: partialUpdateProjectProviderConfig
+      description: ""
+      parameters:
+        - name: project
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProviderConfig"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ProviderConfig"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/ProviderConfig"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProviderConfig"
+          description: ""
+      tags:
+        - api
+    delete:
+      operationId: destroyProjectProviderConfig
+      description: ""
+      parameters:
+        - name: project
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      responses:
+        "204":
+          description: ""
+      tags:
+        - api
+  /api/providers/:
+    get:
+      operationId: listProviders
+      description: ""
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+          description: ""
+      tags:
+        - api
+  /api/auth/token/verify/:
+    post:
+      operationId: createTokenVerify
+      description:
+        "Takes a token and indicates if it is valid.  This view provides
+        no
+
+        information about a token's fitness for a particular use."
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TokenVerify"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/TokenVerify"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/TokenVerify"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenVerify"
+          description: ""
+      tags:
+        - api
+  /api/auth/token/refresh/:
+    post:
+      operationId: createCookieTokenRefresh
+      description: ""
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CookieTokenRefresh"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/CookieTokenRefresh"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/CookieTokenRefresh"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CookieTokenRefresh"
+          description: ""
+      tags:
+        - api
+  /api/auth/social/google/:
+    post:
+      operationId: createGoogleSocialLogin
+      description: ""
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SocialLogin"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/SocialLogin"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/SocialLogin"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SocialLogin"
+          description: ""
+      tags:
+        - api
+  /api/auth/social/github/:
+    post:
+      operationId: createGithubSocialLogin
+      description: ""
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SocialLogin"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/SocialLogin"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/SocialLogin"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SocialLogin"
+          description: ""
+      tags:
+        - api
+  /api/client/connections/{connectionId}/refresh/:
+    post:
+      operationId: createClientProviderConnectionRefreshData
+      description: ""
+      parameters:
+        - name: connectionId
+          in: path
+          required: true
+          description: ""
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        "201":
+          content:
+            application/json:
+              schema: {}
+          description: ""
+      tags:
+        - api
+  /api/client/query:
+    post:
+      operationId: createClientQuery
+      description: ""
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        "201":
+          content:
+            application/json:
+              schema: {}
+          description: ""
+      tags:
+        - api
+  /api/api-keys/:
+    post:
+      operationId: createAPIKeyPair
+      description: ""
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/APIKeyPair"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/APIKeyPair"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/APIKeyPair"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIKeyPair"
+          description: ""
+      tags:
+        - api
+  /api/provider-configs/:
+    post:
+      operationId: createProviderConfig
+      description: ""
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProviderConfig"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ProviderConfig"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/ProviderConfig"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProviderConfig"
+          description: ""
+      tags:
+        - api
+  /api/data/:
+    post:
+      operationId: createAddData
+      description: ""
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        "201":
+          content:
+            application/json:
+              schema: {}
+          description: ""
+      tags:
+        - api
+  /api/query/:
+    post:
+      operationId: createQuery
+      description: ""
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+          application/x-www-form-urlencoded:
+            schema: {}
+          multipart/form-data:
+            schema: {}
+      responses:
+        "201":
+          content:
+            application/json:
+              schema: {}
+          description: ""
+      tags:
+        - api
+components:
+  schemas:
+    UserDetails:
+      type: object
+      properties:
+        pk:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          description:
+            Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+\z
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          readOnly: true
+        first_name:
+          type: string
+          maxLength: 150
+        last_name:
+          type: string
+          maxLength: 150
+      required:
+        - username
+    Project:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        slug:
+          type: string
+          maxLength: 255
+          pattern: ^[-a-zA-Z0-9_]+$
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+        - name
+        - slug
+    APIKeyPair:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        publishable_key:
+          type: string
+          readOnly: true
+        secret_key_prefix:
+          type: string
+          readOnly: true
+        last_used_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        project:
+          type: string
+          readOnly: true
+      required:
+        - name
+    ProviderConfig:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        provider:
+          type: string
+          readOnly: true
+        provider_slug:
+          type: string
+          maxLength: 64
+        provider_type:
+          enum:
+            - oauth2
+            - credentials
+            - secret
+            - custom
+          type: string
+        client_id:
+          type: string
+          nullable: true
+          maxLength: 255
+        client_secret:
+          type: string
+          nullable: true
+          maxLength: 255
+        scope:
+          type: string
+          nullable: true
+          maxLength: 255
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        project:
+          type: string
+          readOnly: true
+      required:
+        - provider_slug
+        - provider_type
+    ProviderConnection:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        type:
+          type: string
+          readOnly: true
+        provider:
+          type: string
+          readOnly: true
+        identity:
+          type: string
+          maxLength: 255
+        status:
+          enum:
+            - active
+            - inactive
+            - pending
+          type: string
+        oauth2_access_token:
+          type: string
+          nullable: true
+          maxLength: 255
+        oauth2_refresh_token:
+          type: string
+          nullable: true
+          maxLength: 255
+        oauth2_expires_at:
+          type: string
+          format: date-time
+          nullable: true
+        oauth2_scope:
+          type: string
+          nullable: true
+          maxLength: 255
+        credentials_username:
+          type: string
+          nullable: true
+          maxLength: 255
+        credentials_password:
+          type: string
+          nullable: true
+          maxLength: 255
+        secret_secret:
+          type: string
+          nullable: true
+          maxLength: 255
+        custom_json_data:
+          type: object
+          nullable: true
+        last_used_at:
+          type: string
+          format: date-time
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        provider_config:
+          type: integer
+      required:
+        - identity
+        - provider_config
+    TokenVerify:
+      type: object
+      properties:
+        token:
+          type: string
+          writeOnly: true
+      required:
+        - token
+    CookieTokenRefresh:
+      type: object
+      properties:
+        refresh:
+          type: string
+          description: WIll override cookie.
+        access:
+          type: string
+          readOnly: true
+    SocialLogin:
+      type: object
+      properties:
+        access_token:
+          type: string
+        code:
+          type: string
+        id_token:
+          type: string

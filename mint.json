@@ -8,13 +8,18 @@
   "favicon": "/favicon.svg",
   "colors": {
     "primary": "#000",
-    "light": "#000",
+    "light": "#fff",
     "dark": "#000",
     "anchors": {
       "from": "#000",
       "to": "#000"
+    },
+    "background": {
+      "light": "#FFF",
+      "dark": "#000"
     }
   },
+  "openapi": ["/openapi-schema.yml"],
   "topbarLinks": [
     {
       "name": "Support",
@@ -33,16 +38,6 @@
   ],
   "anchors": [
     {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
-    },
-    {
-      "name": "Community",
-      "icon": "discord",
-      "url": "https://mintlify.com/community"
-    },
-    {
       "name": "Github",
       "icon": "github",
       "url": "https://github.com/tractorbeamai"
@@ -50,17 +45,122 @@
   ],
   "navigation": [
     {
-      "group": "Introduction",
+      "group": "Data",
       "pages": [
-        "welcome",
-        "quickstart",
-        "examples"
+        "api-reference/endpoints/post-apidata",
+        "api-reference/endpoints/post-apiquery"
+      ]
+    },
+    {
+      "group": "Client",
+      "pages": [
+        "api-reference/endpoints/post-apiclientquery",
+        {
+          "group": "Connections",
+          "pages": [
+            "api-reference/endpoints/get-apiclientconnections",
+            "api-reference/endpoints/get-apiclientconnections-",
+            "api-reference/endpoints/post-apiclientconnections",
+            "api-reference/endpoints/post-apiclientconnections-refresh",
+            "api-reference/endpoints/put-apiclientconnections-",
+            "api-reference/endpoints/delete-apiclientconnections-",
+            "api-reference/endpoints/patch-apiclientconnections-"
+          ]
+        },
+        {
+          "group": "Providers",
+          "pages": [
+            "api-reference/endpoints/get-apiclientprovider-configs",
+            "api-reference/endpoints/get-apiclientprovider-configs-"
+          ]
+        },
+        {
+          "group": "Authorize",
+          "pages": [
+            "api-reference/endpoints/get-apiclientconnections-oauth2authorize",
+            "api-reference/endpoints/get-apioauth2callback"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Keys",
+      "pages": [
+        {
+          "group": "API Keys",
+          "pages": [
+            "api-reference/endpoints/get-apiapi-keys-",
+            "api-reference/endpoints/post-apiapi-keys",
+            "api-reference/endpoints/put-apiapi-keys-",
+            "api-reference/endpoints/patch-apiapi-keys-",
+            "api-reference/endpoints/delete-apiapi-keys-"
+          ]
+        },
+        {
+          "group": "Project Keys",
+          "pages": [
+            "api-reference/endpoints/get-apiprojects-api-keys",
+            "api-reference/endpoints/get-apiprojects-api-keys-",
+            "api-reference/endpoints/post-apiprojects-api-keys",
+            "api-reference/endpoints/put-apiprojects-api-keys-",
+            "api-reference/endpoints/patch-apiprojects-api-keys-",
+            "api-reference/endpoints/delete-apiprojects-api-keys-"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Projects",
+      "pages": [
+        {
+          "group": "Project",
+          "pages": [
+            "api-reference/endpoints/get-apiprojects",
+            "api-reference/endpoints/get-apiprojects-",
+            "api-reference/endpoints/post-apiprojects",
+            "api-reference/endpoints/put-apiprojects-",
+            "api-reference/endpoints/delete-apiprojects-",
+            "api-reference/endpoints/patch-apiprojects-"
+          ]
+        },
+        {
+          "group": "Provider",
+          "pages": [
+            "api-reference/endpoints/get-apiprojects-provider-configs",
+            "api-reference/endpoints/get-apiprojects-provider-configs-",
+            "api-reference/endpoints/post-apiprojects-provider-configs",
+            "api-reference/endpoints/patch-apiprojects-provider-configs-",
+            "api-reference/endpoints/put-apiprojects-provider-configs-",
+            "api-reference/endpoints/delete-apiprojects-provider-configs-"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "Providers",
+      "pages": [
+        "api-reference/endpoints/get-apiprovider-configs-",
+        "api-reference/endpoints/get-apiproviders",
+        "api-reference/endpoints/post-apiprovider-configs",
+        "api-reference/endpoints/put-apiprovider-configs-",
+        "api-reference/endpoints/patch-apiprovider-configs-",
+        "api-reference/endpoints/delete-apiprovider-configs-"
+      ]
+    },
+    {
+      "group": "Authorize",
+      "pages": [
+        "api-reference/endpoints/get-apiauthuser",
+        "api-reference/endpoints/patch-apiauthuser",
+        "api-reference/endpoints/post-apiauthtokenverify",
+        "api-reference/endpoints/post-apiauthtokenrefresh",
+        "api-reference/endpoints/post-apiauthsocialgoogle",
+        "api-reference/endpoints/post-apiauthsocialgithub"
       ]
     }
   ],
   "footerSocials": {
     "twitter": "https://twitter.com/tractorbeamai",
-    "github": "https://github.com/tractorbeamai",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "github": "https://github.com/tractorbeamai"
   }
 }
