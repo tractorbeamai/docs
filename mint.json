@@ -1,58 +1,95 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Tractorbeam AI",
+  "name": "Tractorbeam",
   "logo": {
     "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "light": "/logo/light.svg",
+    "href": "https://tractorbeam.ai"
   },
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#262626",
-    "light": "#fff",
-    "dark": "#262626",
-    "anchors": {
-      "from": "#262626",
-      "to": "#262626"
-    },
+    "primary": "#000",
+    "light": "#000",
+    "dark": "#000",
     "background": {
       "light": "#fff",
-      "dark": "#262626"
+      "dark": "#000"
     }
   },
+  "font": {
+    "family": "sans-serif"
+  },
+  "search": {
+    "location": "top"
+  },
+  "sidebar": {
+    "items": "container"
+  },
+  "theme": "quill",
+  "layout": "topnav",
   "topbarLinks": [
+    {
+      "name": "Status",
+      "url": "https://status.tractorbeam.ai"
+    },
     {
       "name": "Support",
       "url": "mailto:support@tractorbeam.ai"
+    },
+    {
+      "name": "Dashboard",
+      "url": "https://app.tractorbeam.ai"
     }
   ],
-  "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://tractorbeam.ai/app"
-  },
   "tabs": [
     {
-      "name": "API Reference",
-      "openapi": "https://api.tractorbeam.ai/openapi.yaml",
-      "url": "api-reference"
-    }
-  ],
-  "anchors": [
+      "name": "Guide",
+      "url": "/guide"
+    },
     {
-      "name": "Github",
-      "icon": "github",
-      "url": "https://github.com/tractorbeamai"
+      "name": "Examples",
+      "url": "/examples"
+    },
+    {
+      "name": "API Reference",
+      "url": "/api-reference",
+      "openapi": "/openapi.yaml"
     }
   ],
   "navigation": [
     {
-      "group": "Todo",
-      "pages": [
-        "docs/todo"
-      ]
+      "group": "",
+      "pages": ["guide/introduction", "guide/architecture", "guide/changelog"]
+    },
+    {
+      "group": "Guide",
+      "pages": ["guide/graphs", "guide/more-graphs"]
+    },
+    {
+      "group": "Other Topics",
+      "pages": ["guide/other/other"]
+    },
+    {
+      "group": "Examples",
+      "pages": ["examples/my-great-example"]
     }
   ],
-  "footerSocials": {
-    "twitter": "https://twitter.com/tractorbeamai",
-    "github": "https://github.com/tractorbeamai"
+  "feedback": {
+    "thumbsRating": true,
+    "suggestEdit": true,
+    "raiseIssue": true
+  },
+  "footer": {
+    "socials": {
+      "x": "https://twitter.com/tractorbeamai",
+      "github": "https://github.com/tractorbeamai",
+      "linkedin": "https://www.linkedin.com/company/tractorbeamai",
+      "website": "https://tractorbeam.ai"
+    }
+  },
+  "analytics": {
+    "posthog": {
+      "apiKey": "phc_kbBdDiv3Cy5qPCwTji2YaeiZO3ZFO39OigFmdYeyvDf"
+    }
   }
 }

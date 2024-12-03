@@ -1,0 +1,20 @@
+---
+title: Introduction
+slug: introduction
+icon: hand-wave
+---
+
+**Tractorbeam** is a platform for building, storing, and searching knowledge graphs, built specifically for LLM-based applications and workflows.
+
+The architecture separates storage from compute, enabling scalability without data migration or replication complexity. Data is committed directly to durable, cost-effective object storage, ensuring both reliability and performance.
+
+For data consistency, Tractorbeam implements a write-ahead log system. Data is first committed to this log, then asynchronously indexed for optimal query performance. All committed data remains accessible through log scanning even before indexing completes, providing the same _Read Committed_ isolation level [used by PostgreSQL](https://www.postgresql.org/docs/current/transaction-iso.html) and other databases.
+
+<CardGroup>
+  <Card title="Getting Started" icon="rocket" href="/getting-started">
+    Learn how to get up and running with Tractorbeam.
+  </Card>
+  <Card title="Architecture" icon="building-columns" href="/architecture">
+    Learn about Tractorbeam's architecture and design principles.
+  </Card>
+</CardGroup>
