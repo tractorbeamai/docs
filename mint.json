@@ -68,7 +68,7 @@
     },
     {
       "group": "Guide",
-      "pages": ["guide/graphs", "guide/more-graphs"]
+      "pages": ["guide/guide/graphs", "guide/guide/more-graphs"]
     },
     {
       "group": "Other Topics",
