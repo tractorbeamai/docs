@@ -59,7 +59,12 @@
   "navigation": [
     {
       "group": "",
-      "pages": ["guide/introduction", "guide/architecture", "guide/changelog"]
+      "pages": [
+        "guide/introduction",
+        "guide/architecture",
+        "guide/changelog",
+        "guide/limits"
+      ]
     },
     {
       "group": "Guide",
