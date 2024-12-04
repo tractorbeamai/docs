@@ -1,0 +1,52 @@
+---
+title: Response Format
+---
+
+All responses from the Tractorbeam API use JSON and follow the [JSend specification](https://github.com/omniti-labs/jsend).
+
+## Success Response
+
+Everything is great, and the resource you created/requested is returned.
+
+The HTTP code returned with this response will always be a `200`.
+
+```json
+{
+  "status": "success",
+  "data": {
+    "id": "123",
+    "name": "Example"
+  }
+}
+```
+
+## Failure Response
+
+_You_ did something wrong, and your request could not be processed.
+For example, a required field was missing or the resource you were trying to create already exists.
+The response body will contain a list of specific errors or a general error message.
+
+The HTTP code returned with this response will always be a `3XX` or `4XX`.
+
+```json
+{
+  "status": "fail",
+  "data": {
+    "field": "Error message"
+  }
+}
+```
+
+## Error Response
+
+_We_ did something wrong, and your request could not be processed.
+The response body may contain a general error message.
+
+The HTTP code returned with this response will always be a `500`.
+
+```json
+{
+  "status": "error",
+  "message": "Error description"
+}
+```

@@ -1,0 +1,21 @@
+---
+title: Compression
+---
+
+Networking ingress/egress costs (from your cloud provider) can add up quickly, especially for bulk data uploads or large responses. We recommend compressing your requests and accepting compressed responses.
+
+**We support the `br`, `gzip`, `deflate`, and `zstd` compression methods.**
+
+To enable compression, set the [standard HTTP headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Compression):
+
+- `Content-Encoding: <method>` to indicate you've compressed the request body
+- `Accept-Encoding: <method>` to request a compressed response
+
+Note that these only reduce the number of bytes sent over the network, not the amount persisted and/or billed by us. (Your cloud provider likely bills for this network traffic.)
+
+<Tip>
+  If you're sending requests from the browser (i.e. in a SPA) or a high-level
+  HTTP library like [requests](https://requests.readthedocs.io/en/latest/) or
+  [httpx](https://www.python-httpx.org/), some compression headers (though
+  likely not all methods) may be set automatically.
+</Tip>

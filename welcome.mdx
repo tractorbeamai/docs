@@ -1,22 +1,35 @@
 ---
-title: 'Welcome to Tractorbeam'
-sidebarTitle: 'Welcome'
-description: "Tractorbeam is a unified API for leveraging customer data in AI apps."
-icon: 'hand-wave'
+title: Welcome
+icon: hand-wave
 ---
 
-_The following is outdated._
+**Tractorbeam** is a platform for building, storing, and searching knowledge graphs for fast, deterministic LLM reasoning and retrieval.
 
-Tractorbeam is a unified API for building AI applications that leverage your customers' data.
-We take care of all the hard parts of semantic search (optimized queries, embedding, hybrid vector search) and AI-first integrations, so you can get back to building features that matter.
-We also take care of the whole OAuth flow, offering an easy way to connect to your customers' data sources.
+- **Cheap:** Don't store infrequently accessed data on expensive DRAM. Store billions of triples in low-cost object storage, made fast by our custom-tuned NVMe cache.
+- **Accurate:** Model your domain's unique semantics in your graph's ontology for day-one domain-tuned retrieval.
+- **Serverless:** Pay only for what you use. Separate billing for storage and compute. Scale to zero when inactive.
 
-Tractorbeam works by allowing your users to connect their data sources (e.g. Google Drive, Dropbox, Slack, etc.) to your application.
-This connection process is faciliated through **Tractorbeam Connect**, a set of client-side components that provide a secure and slick way for your users to connect their data sources to your application.
-Once they've connected their data, we'll get to work behind the scenes to index their data, optimize their queries, and power your application's AI features.
+<Info>
+  
+  We're currently in a **limited beta** with perfect-fit use-cases. [Contact us](mailto:hello@tractorbeam.ai) to get access.
+
+</Info>
 
 <CardGroup>
-  <Card icon="circle-play" href="https://youtube.com" title="10-Minute Demo">Watch a product walkthrough</Card>
-  <Card icon="hand-wave" href="https://tractorbeam.ai/demo" title="Interactive Playground">Try out the SDK</Card>
-  <Card icon="person-running-fast" href="/quickstart" title="Quickstart">Get up and running in minutes</Card>
+  <Card title="Getting Started" icon="rocket" href="/guide/getting-started">
+    Learn how to get up and running with Tractorbeam.
+  </Card>
+  <Card title="Architecture" icon="building-columns" href="/guide/architecture">
+    Learn about Tractorbeam's architecture and design principles.
+  </Card>
+  <Card
+    title="Examples"
+    icon="palette"
+    href="https://github.com/tractorbeamai/examples"
+  >
+    See complete examples of how to use Tractorbeam in your applications.
+  </Card>
+  <Card title="Pricing" icon="dollar-sign" href="/pricing">
+    Learn about Tractorbeam's easy-to-understand pricing.
+  </Card>
 </CardGroup>

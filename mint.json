@@ -8,25 +8,29 @@
   },
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#000",
-    "light": "#000",
-    "dark": "#000",
+    "primary": "#059669",
+    "light": "#059669",
+    "dark": "#059669",
     "background": {
       "light": "#fff",
       "dark": "#000"
     }
   },
   "font": {
-    "family": "sans-serif"
+    "family": "Inter"
   },
   "search": {
     "location": "top"
   },
   "sidebar": {
-    "items": "container"
+    "items": "card"
   },
-  "theme": "quill",
   "layout": "topnav",
+  "topbarCtaButton": {
+    "name": "Dashboard",
+    "url": "https://app.tractorbeam.ai",
+    "arrow": false
+  },
   "topbarLinks": [
     {
       "name": "Status",
@@ -35,48 +39,41 @@
     {
       "name": "Support",
       "url": "mailto:support@tractorbeam.ai"
-    },
-    {
-      "name": "Dashboard",
-      "url": "https://app.tractorbeam.ai"
     }
   ],
-  "tabs": [
+  "codeBlock": {"mode": "auto"},
+  "anchors": [
     {
-      "name": "Guide",
-      "url": "/guide"
+      "name": "API Reference",
+      "url": "/",
+      "openapi": "/openapi.yaml",
+      "icon": "code"
     },
     {
       "name": "Examples",
-      "url": "/examples"
-    },
-    {
-      "name": "API Reference",
-      "url": "/api-reference",
-      "openapi": "/openapi.yaml"
+      "url": "https://github.com/tractorbeamai/examples",
+      "icon": "palette"
     }
   ],
   "navigation": [
     {
-      "group": "",
+      "group": "Overview",
       "pages": [
-        "guide/introduction",
-        "guide/architecture",
-        "guide/changelog",
-        "guide/limits"
+        "welcome",
+        "getting-started",
+        "architecture",
+        "pricing",
+        "limits",
+        "changelog"
       ]
     },
     {
-      "group": "Guide",
-      "pages": ["guide/guide/graphs", "guide/guide/more-graphs"]
-    },
-    {
-      "group": "Other Topics",
-      "pages": ["guide/other/other"]
-    },
-    {
-      "group": "Examples",
-      "pages": ["examples/my-great-example"]
+      "group": "Guides",
+      "pages": [
+        "guides/authentication",
+        "guides/response-format",
+        "guides/compression"
+      ]
     }
   ],
   "feedback": {
