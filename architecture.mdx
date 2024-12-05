@@ -3,6 +3,32 @@ title: Architecture
 icon: building-columns
 ---
 
-The architecture separates storage from compute, enabling scalability without data migration or replication complexity. Data is committed directly to durable, cost-effective object storage, ensuring both reliability and performance.
+Tractorbeam is a serverless knowledge graph infrastructure designed for AI applications that need fast, deterministic reasoning.
+Our system architecture follows modern distributed database design principles, with a particular focus on decoupling compute from storage and optimizing for many smaller graphs rather than a single monolithic graph.
+Tractorbeam supports ACID trasactions.
 
-For data consistency, Tractorbeam implements a write-ahead log system. Data is first committed to this log, then asynchronously indexed for optimal query performance. All committed data remains accessible through log scanning even before indexing completes, providing the same _Read Committed_ isolation level [used by PostgreSQL](https://www.postgresql.org/docs/current/transaction-iso.html) and other databases.
+## Storage Architecture
+
+Our storage architecture implements a [log-structured merge (LSM)](https://en.wikipedia.org/wiki/Log-structured_merge-tree) pattern adapted specifically for graph data. At its foundation lies an [append-only write-ahead log (WAL)](https://en.wikipedia.org/wiki/Write-ahead_logging) stored in object storage, ensuring durability and consistency for all operations. This design choice enables high write throughput while maintaining strong consistency guarantees.
+
+The asynchronous indexing system continuously optimizes data organization through intelligent strategies. This process balances storage efficiency with query performance while maintaining historical versions for time travel queries. For details on storage quotas and retention policies, see our [pricing page](/pricing).
+
+Our custom-tuned [NVMe](https://en.wikipedia.org/wiki/NVM_Express) SSD cache layer significantly reduces latency for warm queries on recently-accessed data.
+
+## Query Processing and Reasoning
+
+Tractorbeam's query processing system is built from the ground up for knowledge graph workloads. It efficiently handles both simple lookups and complex multi-hop traversals while maintaining consistency guarantees. The system supports both traditional [SPARQL](https://en.wikipedia.org/wiki/SPARQL) queries (currently a limited subset, though our goal is full compliance) and natural-language interfaces, integrating seamlessly with our deterministic reasoning capabilities.
+
+The deterministic reasoning engine sets Tractorbeam apart from other RAG infrastructure. Unlike the probabilistic reasoning common in LLMs, our engine provides provable, step-by-step deductions based on your domain's rules. When combined with our _Ontology Studio_—a powerful development environment for crafting and testing knowledge schemas—this enables you to build reliable, domain-specific reasoning systems.
+
+While primarily focused on graph operations, our architecture also supports [vector similarity search](https://www.pinecone.io/learn/what-is-similarity-search/) at the triple level by maintaining an optional approximate-nearest-neighbor index based on [SPANN](https://arxiv.org/abs/2111.08566), enabling hybrid queries that combine semantic similarity with graph-based reasoning. This integration is particularly powerful for LLM applications that need both semantic search and structured reasoning.
+
+## Transaction Processing
+
+Tractorbeam implements [read committed](https://jepsen.io/consistency/models/read-committed) consistency (the same as [Postgres default](https://www.postgresql.org/docs/7.2/xact-read-committed.html)) through our log-structured storage architecture.
+
+Our transaction protocol is optimized for the common case of many small, independent graphs rather than contentious updates to a single large graph. This architectural choice enables us to maintain high throughput without the complexity of traditional concurrency control systems.
+
+## System Limits
+
+Our architecture is optimized for scenarios involving many smaller graphs rather than single massive graphs. This design choice enables us to provide better isolation and performance characteristics for typical AI application workloads. Current system limits and scaling characteristics are documented in detail on our [limits page](/limits).
