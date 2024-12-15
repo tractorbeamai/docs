@@ -1,0 +1,706 @@
+openapi: 3.1.0
+info:
+  title: Tractorbeam API
+  description: The Tractorbeam REST API. Please see https://tractorbeam.ai/docs for more details.
+  contact:
+    name: Tractorbeam Support
+    email: support@tractorbeam.ai
+  version: 0.1.0
+servers:
+- url: https://api.tractorbeam.ai
+paths:
+  /api-tokens:
+    get:
+      tags:
+      - API Tokens
+      summary: List API Tokens
+      description: List all API tokens for the authenticated user's organization.
+      operationId: list_api_tokens
+      responses:
+        '200':
+          description: Successfully listed API Tokens
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - api_tokens
+                properties:
+                  api_tokens:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/APITokenSchema'
+      security:
+      - api_token: []
+    post:
+      tags:
+      - API Tokens
+      summary: Create API Token
+      description: Create a new API token for the authenticated organization.
+      operationId: create_api_token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+                  description: The name that will be used to identify the API token.
+                  example: my_api_token
+                  maxLength: 64
+                  minLength: 1
+        required: true
+      responses:
+        '201':
+          description: API Token created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APITokenSchema'
+      security:
+      - api_token: []
+  /api-tokens/{id}:
+    get:
+      tags:
+      - API Tokens
+      summary: Get API Token
+      description: Get an API token by its ID (e.g. `token_123`). The token must belong to the authenticated user's organization.
+      operationId: get_api_token
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APITokenSchema'
+      security:
+      - api_token: []
+  /api-tokens/{id}/revoke:
+    post:
+      tags:
+      - API Tokens
+      summary: Revoke API Token
+      description: Revoke a specific API Token for the authenticated organization. After revocation, the token will no longer be valid and cannot be used to authenticate requests.
+      operationId: revoke_api_token
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the API token to revoke
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: API Token revoked successfully
+      security:
+      - api_token: []
+  /documents:
+    get:
+      tags:
+      - Documents
+      summary: List Documents
+      description: List all documents for the authenticated user's organization.
+      operationId: list_documents
+      responses:
+        '200':
+          description: Successfully listed documents
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - documents
+                properties:
+                  documents:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DocumentSchema'
+      security:
+      - api_token: []
+    post:
+      tags:
+      - Documents
+      summary: Create Document
+      description: Create a new document. Unlike other endpoints, this endpoint requires data to be sent as `multipart/form-data` rather than JSON.
+      operationId: create_document
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+                  description: The name of the document
+                  example: my_document.txt
+                text:
+                  type:
+                  - string
+                  - 'null'
+                  description: The text content of the document
+                  example: Hello world
+                file:
+                  type:
+                  - array
+                  - 'null'
+                  items:
+                    type: integer
+                    format: int32
+                    minimum: 0
+                  description: The file content of the document
+        required: true
+      responses:
+        '201':
+          description: Document created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentSchema'
+      security:
+      - api_token: []
+  /documents/{id}:
+    get:
+      tags:
+      - Documents
+      summary: Get Document Metadata
+      description: Get metadata for a single document by its ID.
+      operationId: get_document_metadata
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the document to get metadata for
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Document metadata retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentSchema'
+      security:
+      - api_token: []
+    delete:
+      tags:
+      - Documents
+      summary: Delete Document
+      description: Delete a document by its ID.
+      operationId: delete_document
+      parameters:
+      - name: document_id
+        in: path
+        description: The ID of the document to delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Document deleted successfully
+      security:
+      - api_token: []
+  /documents/{id}/contents:
+    get:
+      tags:
+      - Documents
+      summary: Get Document Contents
+      description: Get the binary contents of a document by its ID.
+      operationId: get_document_contents
+      parameters:
+      - name: document_id
+        in: path
+        description: The ID of the document to get contents for
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Document contents retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentContentsSchema'
+      security:
+      - api_token: []
+  /documents/{id}/tuples:
+    get:
+      tags:
+      - Documents
+      summary: Get Document Tuples
+      description: |-
+        Extract tuples from a document by its ID. If streaming is enabled, the response will be a stream of tuples as JSON server-sent events.
+        This endpoint requires calling our external inference service, and will have significant latency.
+      operationId: get_document_tuples
+      responses:
+        '200':
+          description: Successfully retrieved document tuples
+      security:
+      - api_token: []
+  /graphs:
+    get:
+      tags:
+      - Graphs
+      summary: List Graphs
+      description: List all graphs for the authenticated user.
+      operationId: list_graphs
+      parameters:
+      - name: owner
+        in: query
+        description: Filter graphs by owner
+        required: false
+        schema:
+          type:
+          - string
+          - 'null'
+      responses:
+        '200':
+          description: Successfully listed graphs
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - graphs
+                properties:
+                  graphs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GraphSchema'
+      security:
+      - api_token: []
+    post:
+      tags:
+      - Graphs
+      summary: Create Graph
+      description: Create a new graph.
+      operationId: create_graph
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+        required: true
+      responses:
+        '200':
+          description: Graph created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphSchema'
+      security:
+      - api_token: []
+  /graphs/{owner}/{name}:
+    get:
+      tags:
+      - Graphs
+      summary: Get Graph
+      description: Get a graph by its owner and name.
+      operationId: get_graph
+      responses:
+        '200':
+          description: Successfully retrieved graph
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphSchema'
+      security:
+      - api_token: []
+    delete:
+      tags:
+      - Graphs
+      summary: Delete Graph
+      description: Delete an existing graph and all of its tuples.
+      operationId: delete_graph
+      parameters:
+      - name: owner
+        in: path
+        description: Graph owner
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        description: Graph name
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Graph deleted successfully
+      security:
+      - api_token: []
+  /graphs/{owner}/{name}/query:
+    post:
+      tags:
+      - Graphs
+      summary: Query Graph
+      description: Query tuples from an existing graph using a SPARQL query.
+      operationId: query_graph
+      parameters:
+      - name: owner
+        in: path
+        description: Graph owner
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        description: Graph name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - sparql
+              properties:
+                sparql:
+                  type: string
+        required: true
+      responses:
+        '200':
+          description: Successfully queried graph
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - bindings
+                properties:
+                  bindings:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BindingSchema'
+      security:
+      - api_token: []
+  /graphs/{owner}/{name}/tuples:
+    post:
+      tags:
+      - Graphs
+      summary: Insert Graph Tuples
+      description: Insert tuples into an existing graph.
+      operationId: insert_graph_tuples
+      parameters:
+      - name: owner
+        in: path
+        description: Graph owner
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        description: Graph name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - tuples
+              properties:
+                tuples:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/TupleSchema'
+        required: true
+      responses:
+        '201':
+          description: Tuples inserted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - inserted
+                properties:
+                  inserted:
+                    type: integer
+                    description: The number of tuples inserted
+                    example: 10
+                    minimum: 0
+      security:
+      - api_token: []
+  /health:
+    get:
+      tags:
+      - Health Check
+      summary: Health Check
+      description: |-
+        This is a simple health check that does not require authentication.
+        It is used to check if the server is running and healthy.
+      operationId: health_check
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheckResponse'
+  /queries/decode:
+    post:
+      tags:
+      - Query
+      summary: Execute Keyword Branch Query
+      description: |-
+        Execute a keyword branch query across multiple graphs, extracting keywords from natural language
+        and exploring the graph structure around those keywords.
+      operationId: create_keyword_branch_query
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - query
+              - depth
+              - graph_names
+              properties:
+                query:
+                  type: string
+                depth:
+                  type: integer
+                  format: int32
+                  minimum: 0
+                graph_names:
+                  type: array
+                  items:
+                    type: string
+        required: true
+      responses:
+        '200':
+          description: Successfully executed keyword branch query
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - chains
+                properties:
+                  chains:
+                    type: array
+                    items:
+                      type: string
+      security:
+      - api_token: []
+  /query:
+    post:
+      tags:
+      - Query
+      summary: Execute Natural Language Query
+      description: Execute a natural language query across multiple graphs.
+      operationId: create_natural_language_query
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - query
+              - depth
+              - graph_names
+              properties:
+                query:
+                  type: string
+                depth:
+                  type: integer
+                  format: int32
+                  minimum: 0
+                graph_names:
+                  type: array
+                  items:
+                    type: string
+        required: true
+      responses:
+        '200':
+          description: Successfully executed natural language query
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - chains
+                properties:
+                  chains:
+                    type: array
+                    items:
+                      type: string
+      security:
+      - api_token: []
+components:
+  schemas:
+    APITokenSchema:
+      type: object
+      title: API Token
+      required:
+      - id
+      - owner
+      - name
+      - token_prefix
+      - created_at
+      properties:
+        id:
+          type: string
+          description: The ID of the API token. Starts with prefix `token_`.
+          example: token_123
+        owner:
+          type: string
+          description: The owner of the API token, either an organization or a user.
+          example: org_123
+        name:
+          type: string
+          description: The human-readable name of the API token.
+          example: my_api_token
+        token_prefix:
+          type: string
+          description: The 8-character prefix of the token itself.
+          example: e671a234
+        created_at:
+          type: string
+          description: The date and time when the API token was created in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) format.
+          example: 2024-01-01T00:00:00Z
+    BindingSchema:
+      type: object
+      additionalProperties:
+        type: string
+        title: Binding
+      propertyNames:
+        type: string
+        title: Binding
+    DocumentContentsSchema:
+      type: object
+      title: Document Contents
+      required:
+      - contents
+      properties:
+        contents:
+          type: array
+          items:
+            type: integer
+            format: int32
+            minimum: 0
+          description: The binary contents of the document
+    DocumentSchema:
+      type: object
+      title: Document
+      required:
+      - id
+      - name
+      - owner
+      - file_type
+      - file_bytes
+      - created_at
+      properties:
+        id:
+          type: string
+          description: The ID of the document
+          example: doc_123
+        name:
+          type: string
+          description: The name of the document
+          example: my_document.txt
+          maxLength: 255
+        owner:
+          type: string
+          description: The owner of the document
+          example: org_123
+        file_type:
+          type: string
+          description: The file type of the document
+          example: text/plain
+        file_bytes:
+          type: integer
+          format: int64
+          description: The size of the document in bytes
+          example: '1234'
+        created_at:
+          type: string
+          description: The date and time when the document was created in RFC 3339 format
+          example: 2024-01-01T00:00:00Z
+    GraphSchema:
+      type: object
+      title: Graph
+      required:
+      - owner
+      - name
+      - created_at
+      properties:
+        owner:
+          type: string
+          description: The owner of the graph, in the format "user_{id}" or "org_{id}"
+          example: user_123
+        name:
+          type: string
+          description: 'The name of the graph, must match regex: ^[\w\.-]{1,64}$'
+          example: my-graph-123
+        created_at:
+          type: string
+          description: The creation timestamp in ISO 8601 format
+          example: 2023-11-14T12:34:56Z
+        tuple_count:
+          type:
+          - integer
+          - 'null'
+          description: The number of tuples in the graph
+          example: 100
+          minimum: 0
+    HealthCheckResponse:
+      type: object
+      title: Health Check
+      required:
+      - health
+      properties:
+        health:
+          type: string
+          example: OK
+    TupleSchema:
+      type: object
+      title: Tuple
+      required:
+      - subject
+      - predicate
+      - object
+      properties:
+        subject:
+          type: string
+          description: The subject of the tuple
+          example: Wade
+        predicate:
+          type: string
+          description: The predicate of the tuple
+          example: works_at
+        object:
+          type: string
+          description: The object of the tuple
+          example: Tractorbeam
+  securitySchemes:
+    api_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+- api_token: []
+tags:
+- name: Graphs
+  description: Create and query graph databases to store and analyze connected data.
+- name: Documents
+  description: Extract structured data from unstructured documents and store it in graphs.
+- name: API Tokens
+  description: Manage authentication tokens for secure API access.
+- name: Health
+  description: Check the health of the API.
