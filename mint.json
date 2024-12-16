@@ -46,7 +46,7 @@
     {
       "name": "API Reference",
       "url": "/api-reference",
-      "openapi": "./openapi.yml",
+      "openapi": "/openapi.yaml",
       "icon": "code"
     },
     {
