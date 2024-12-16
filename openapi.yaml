@@ -30,8 +30,6 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/APITokenSchema'
-      security:
-      - api_token: []
     post:
       tags:
       - API Tokens
@@ -60,8 +58,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APITokenSchema'
-      security:
-      - api_token: []
   /api-tokens/{id}:
     get:
       tags:
@@ -84,8 +80,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APITokenSchema'
-      security:
-      - api_token: []
   /api-tokens/{id}/revoke:
     post:
       tags:
@@ -104,8 +98,6 @@ paths:
       responses:
         '204':
           description: API Token revoked successfully
-      security:
-      - api_token: []
   /documents:
     get:
       tags:
@@ -127,8 +119,6 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/DocumentSchema'
-      security:
-      - api_token: []
     post:
       tags:
       - Documents
@@ -170,8 +160,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DocumentSchema'
-      security:
-      - api_token: []
   /documents/{id}:
     get:
       tags:
@@ -194,8 +182,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DocumentSchema'
-      security:
-      - api_token: []
     delete:
       tags:
       - Documents
@@ -213,8 +199,6 @@ paths:
       responses:
         '204':
           description: Document deleted successfully
-      security:
-      - api_token: []
   /documents/{id}/contents:
     get:
       tags:
@@ -237,8 +221,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DocumentContentsSchema'
-      security:
-      - api_token: []
   /documents/{id}/tuples:
     get:
       tags:
@@ -266,8 +248,6 @@ paths:
       responses:
         '200':
           description: Successfully retrieved document tuples
-      security:
-      - api_token: []
   /graphs:
     get:
       tags:
@@ -289,8 +269,6 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/GraphSchema'
-      security:
-      - api_token: []
     post:
       tags:
       - Graphs
@@ -315,8 +293,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GraphSchema'
-      security:
-      - api_token: []
   /graphs/{owner}/{name}:
     get:
       tags:
@@ -346,8 +322,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GraphSchema'
-      security:
-      - api_token: []
     delete:
       tags:
       - Graphs
@@ -372,8 +346,6 @@ paths:
       responses:
         '204':
           description: Graph deleted successfully
-      security:
-      - api_token: []
   /graphs/{owner}/{name}/query:
     post:
       tags:
@@ -421,8 +393,6 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/BindingSchema'
-      security:
-      - api_token: []
   /graphs/{owner}/{name}/tuples:
     post:
       tags:
@@ -473,8 +443,6 @@ paths:
                     description: The number of tuples inserted
                     example: 10
                     minimum: 0
-      security:
-      - api_token: []
   /health:
     get:
       tags:
@@ -490,7 +458,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HealthCheckResponse'
+                type: object
+                title: Health Check
+                required:
+                - health
+                properties:
+                  health:
+                    type: string
+                    example: OK
+      security: []
   /queries/decode:
     post:
       tags:
@@ -535,8 +511,6 @@ paths:
                     type: array
                     items:
                       type: string
-      security:
-      - api_token: []
   /query:
     post:
       tags:
@@ -579,8 +553,6 @@ paths:
                     type: array
                     items:
                       type: string
-      security:
-      - api_token: []
 components:
   schemas:
     APITokenSchema:
@@ -698,15 +670,6 @@ components:
           description: The number of tuples in the graph
           example: 100
           minimum: 0
-    HealthCheckResponse:
-      type: object
-      title: Health Check
-      required:
-      - health
-      properties:
-        health:
-          type: string
-          example: OK
     TupleSchema:
       type: object
       title: Tuple
