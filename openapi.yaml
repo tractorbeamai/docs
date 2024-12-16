@@ -69,6 +69,14 @@ paths:
       summary: Get API Token
       description: Get an API token by its ID (e.g. `token_123`). The token must belong to the authenticated user's organization.
       operationId: get_api_token
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the API Token to be retrieved.
+        required: true
+        schema:
+          type: string
+        example: token_123
       responses:
         '200':
           description: ''
@@ -88,10 +96,11 @@ paths:
       parameters:
       - name: id
         in: path
-        description: The ID of the API token to revoke
+        description: The ID of the API Token to be revoked.
         required: true
         schema:
           type: string
+        example: token_123
       responses:
         '204':
           description: API Token revoked successfully
@@ -177,6 +186,7 @@ paths:
         required: true
         schema:
           type: string
+        example: doc_123
       responses:
         '200':
           description: Document metadata retrieved successfully
@@ -193,12 +203,13 @@ paths:
       description: Delete a document by its ID.
       operationId: delete_document
       parameters:
-      - name: document_id
+      - name: id
         in: path
         description: The ID of the document to delete
         required: true
         schema:
           type: string
+        example: doc_123
       responses:
         '204':
           description: Document deleted successfully
@@ -212,12 +223,13 @@ paths:
       description: Get the binary contents of a document by its ID.
       operationId: get_document_contents
       parameters:
-      - name: document_id
+      - name: id
         in: path
         description: The ID of the document to get contents for
         required: true
         schema:
           type: string
+        example: doc_123
       responses:
         '200':
           description: Document contents retrieved successfully
@@ -236,6 +248,21 @@ paths:
         Extract tuples from a document by its ID. If streaming is enabled, the response will be a stream of tuples as JSON server-sent events.
         This endpoint requires calling our external inference service, and will have significant latency.
       operationId: get_document_tuples
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the document to get tuples for
+        required: true
+        schema:
+          type: string
+        example: doc_123
+      - name: stream
+        in: query
+        description: Whether to stream the tuples back as a stream of JSON server-sent events
+        required: false
+        schema:
+          type: boolean
+        example: 'true'
       responses:
         '200':
           description: Successfully retrieved document tuples
@@ -248,15 +275,6 @@ paths:
       summary: List Graphs
       description: List all graphs for the authenticated user.
       operationId: list_graphs
-      parameters:
-      - name: owner
-        in: query
-        description: Filter graphs by owner
-        required: false
-        schema:
-          type:
-          - string
-          - 'null'
       responses:
         '200':
           description: Successfully listed graphs
@@ -306,6 +324,21 @@ paths:
       summary: Get Graph
       description: Get a graph by its owner and name.
       operationId: get_graph
+      parameters:
+      - name: owner
+        in: path
+        description: The owner of the graph
+        required: true
+        schema:
+          type: string
+        example: org_123
+      - name: name
+        in: path
+        description: The name of the graph
+        required: true
+        schema:
+          type: string
+        example: my_graph
       responses:
         '200':
           description: Successfully retrieved graph
@@ -324,16 +357,18 @@ paths:
       parameters:
       - name: owner
         in: path
-        description: Graph owner
+        description: The owner of the graph
         required: true
         schema:
           type: string
+        example: org_123
       - name: name
         in: path
-        description: Graph name
+        description: The name of the graph
         required: true
         schema:
           type: string
+        example: my_graph
       responses:
         '204':
           description: Graph deleted successfully
@@ -353,12 +388,14 @@ paths:
         required: true
         schema:
           type: string
+        example: graph-owner
       - name: name
         in: path
         description: Graph name
         required: true
         schema:
           type: string
+        example: graph-name
       requestBody:
         content:
           application/json:
@@ -400,12 +437,14 @@ paths:
         required: true
         schema:
           type: string
+        example: graph-owner
       - name: name
         in: path
         description: Graph name
         required: true
         schema:
           type: string
+        example: graph-name
       requestBody:
         content:
           application/json:
