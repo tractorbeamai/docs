@@ -1,98 +1,95 @@
 {
-  "$schema": "https://mintlify.com/schema.json",
-  "name": "Tractorbeam",
-  "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg",
-    "href": "https://tractorbeam.ai"
-  },
-  "favicon": "/favicon.svg",
-  "colors": {
-    "primary": "#059669",
-    "light": "#059669",
-    "dark": "#059669",
-    "background": {
-      "light": "#fff",
-      "dark": "#000"
-    }
-  },
-  "font": {
-    "family": "Inter"
-  },
-  "search": {
-    "location": "top"
-  },
-  "sidebar": {
-    "items": "card"
-  },
-  "layout": "topnav",
-  "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://app.tractorbeam.ai",
-    "arrow": false
-  },
-  "topbarLinks": [
-    {
-      "name": "Status",
-      "url": "https://status.tractorbeam.ai"
+    "$schema": "https://mintlify.com/schema.json",
+    "name": "Tractorbeam",
+    "logo": {
+        "dark": "/logo/dark.svg",
+        "light": "/logo/light.svg",
+        "href": "https://tractorbeam.ai"
     },
-    {
-      "name": "Support",
-      "url": "mailto:support@tractorbeam.ai"
-    }
-  ],
-  "codeBlock": {"mode": "auto"},
-  "anchors": [
-    {
-      "name": "API Reference",
-      "openapi": "/openapi.yaml",
-      "url": "api-reference",
-      "icon": "code"
+    "favicon": "/favicon.svg",
+    "colors": {
+        "primary": "#059669",
+        "light": "#059669",
+        "dark": "#059669",
+        "background": {
+            "light": "#fff",
+            "dark": "#000"
+        }
     },
-    {
-      "name": "Examples",
-      "url": "https://github.com/tractorbeamai/examples",
-      "icon": "palette"
-    }
-  ],
-  "navigation": [
-    {
-      "group": "Overview",
-      "pages": [
-        "welcome",
-        "getting-started",
-        "architecture",
-        "pricing",
-        "limits",
-        "changelog"
-      ]
+    "font": {
+        "family": "Inter"
     },
-    {
-      "group": "Guides",
-      "pages": [
-        "guides/libraries",
-        "guides/authentication",
-        "guides/response-format",
-        "guides/compression"
-      ]
+    "search": {
+        "location": "top"
+    },
+    "sidebar": {
+        "items": "card"
+    },
+    "layout": "topnav",
+    "topbarCtaButton": {
+        "name": "Dashboard",
+        "url": "https://app.tractorbeam.ai",
+        "arrow": false
+    },
+    "topbarLinks": [
+        {
+            "name": "Status",
+            "url": "https://status.tractorbeam.ai"
+        },
+        {
+            "name": "Support",
+            "url": "mailto:support@tractorbeam.ai"
+        }
+    ],
+    "codeBlock": {
+        "mode": "auto"
+    },
+    "anchors": [
+        {
+            "name": "API Reference",
+            "openapi": "/openapi.yaml",
+            "url": "api-reference",
+            "icon": "code"
+        },
+        {
+            "name": "Examples",
+            "url": "https://github.com/tractorbeamai/examples",
+            "icon": "palette"
+        }
+    ],
+    "navigation": [
+        {
+            "group": "Overview",
+            "pages": [
+                "welcome",
+                "getting-started",
+                "architecture",
+                "pricing",
+                "limits",
+                "changelog"
+            ]
+        },
+        {
+            "group": "Guides",
+            "pages": [
+                "guides/libraries",
+                "guides/authentication",
+                "guides/response-format",
+                "guides/compression"
+            ]
+        }
+    ],
+    "feedback": {
+        "thumbsRating": true,
+        "suggestEdit": true,
+        "raiseIssue": true
+    },
+    "footer": {
+        "socials": {
+            "x": "https://twitter.com/tractorbeamai",
+            "github": "https://github.com/tractorbeamai",
+            "linkedin": "https://www.linkedin.com/company/tractorbeamai",
+            "website": "https://tractorbeam.ai"
+        }
     }
-  ],
-  "feedback": {
-    "thumbsRating": true,
-    "suggestEdit": true,
-    "raiseIssue": true
-  },
-  "footer": {
-    "socials": {
-      "x": "https://twitter.com/tractorbeamai",
-      "github": "https://github.com/tractorbeamai",
-      "linkedin": "https://www.linkedin.com/company/tractorbeamai",
-      "website": "https://tractorbeam.ai"
-    }
-  },
-  "analytics": {
-    "posthog": {
-      "apiKey": "phc_kbBdDiv3Cy5qPCwTji2YaeiZO3ZFO39OigFmdYeyvDf"
-    }
-  }
 }
