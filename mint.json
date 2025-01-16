@@ -47,7 +47,7 @@
     "anchors": [
         {
             "name": "API Reference",
-            "openapi": "/openapi.yaml",
+            "openapi": "/openapi.documented.yaml",
             "url": "api-reference",
             "icon": "code"
         },
